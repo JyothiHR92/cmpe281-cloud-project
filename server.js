@@ -213,7 +213,7 @@ app.post('/api/usercheck',upload.any(),function(req,res){
     //console.log(req.body.lastname);
     ///console.log(req.body.emailid);
         //var firstname = req.body.firstname, lastname = req.body.lastname,
-        var emailid = req.body.emailid, filelocation = 'http://de2gxszuxf8fh.cloudfront.net/'+req.files[0].key, filekey= req.files[0].key,filename=req.files[0].originalname, created= Date.now();//req.files[0].location;
+        var emailid = req.body.emailid, filelocation = 'http://d3k0xqf32bnul5.cloudfront.net/'+req.files[0].key, filekey= req.files[0].key,filename=req.files[0].originalname, created= Date.now();//req.files[0].location;
    console.log(req.files[0]);
         connection.query("INSERT INTO userdata (emailid, filelocation, filekey, filename, created) VALUES ( ?, ?, ?, ?, ?)",
             [emailid, filelocation, filekey, filename, created],
