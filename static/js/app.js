@@ -140,25 +140,6 @@ app.config(function($stateProvider, $urlRouterProvider,$locationProvider) {
               }
           }
       })
-      .state('resources', {
-          url: '/resources',
-          views: {
-              '': {
-                  templateUrl: 'templates/main.html'
-              },
-              'nav@resources': {
-                  templateUrl: 'templates/assets/nav.html',
-                  controller: 'navlogoutController'
-              },
-              'body@resources': {
-                  templateUrl: 'static/html/resource.html',
-                  controller:'resourceController'
-              },
-              'footer@resources': {
-                  templateUrl: 'templates/assets/footer.html'
-              }
-          }
-      })
 
    $locationProvider.html5Mode(true);
 

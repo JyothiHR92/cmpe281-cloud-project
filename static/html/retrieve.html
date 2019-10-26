@@ -6,7 +6,7 @@
 <body>
   <div>
   <h2>Retrieve Upload's</h2>
-    <button class="btn waves-effect waves-teal"  ng-click="retrievedata()">Reterive Files</button>
+    <button class="blue lighten-2 btn waves-effect waves-teal"  ng-click="retrievedata()">Reterive Files</button>
     <!-- <div ng-repeat='n in reterivedata'> -->
         <table class="bordered ">
           <tr>
@@ -24,8 +24,8 @@
             <td>{{n.filename}}</td>
             <td><a href="{{n.filelocation}}" >{{n.filelocation}}</a></td>
             <td>{{n.created | date:"MM/dd/yyyy 'at' h:mma"}}</td>
-            <td><input class="waves-effect waves-light btn" type="button" name="Delete" ng-click="deleteFile(n.filekey)" value="Delete"></td>
-            <td><input class="waves-effect waves-light btn" type="button"  ng-click="updateFile(n.filekey)" value="Update"></td>
+            <td><input class="blue lighten-2 waves-effect waves-light btn" type="button" name="Delete" ng-click="deleteFile(n.filekey)" value="Delete"></td>
+            <td><input class="blue lighten-2 waves-effect waves-light btn" type="button"  ng-click="updateFile(n.filekey)" value="Update"></td>
           </tr>
         </table>
     <!-- </div> -->

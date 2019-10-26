@@ -111,11 +111,6 @@ appControllers.controller('contactController',function($scope,$http,$stateParams
 
 });
 
-appControllers.controller('resourceController',function($scope,$http,$stateParams){
-     $scope.resource ='resources'
-});
-
-
 appControllers.controller('retrieveController',function($scope,$http,$stateParams,$state){
       $scope.emailadd = localStorage.getItem('email');
       $scope.username =JSON.parse(localStorage.getItem('userdata'))[0].firstname;
