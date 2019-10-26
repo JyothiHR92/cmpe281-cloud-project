@@ -14,8 +14,6 @@ appControllers.controller('loginController',function($scope,$http,$stateParams,$
 
   $scope.loginfn=function(){
       $http({
-        // url:"http://upload-env.tmnqr8eusq.us-west-1.elasticbeanstalk.com/api/login",
-       // Content-Type:"application/json",
         data:{'email':$scope.email,'password':$scope.password},
         method: "POST",
         url: "api/login"
@@ -27,7 +25,6 @@ appControllers.controller('loginController',function($scope,$http,$stateParams,$
         console.log(response);
          var urlredirect = 'aboutme';
             $state.go(urlredirect);
-           //$location.path("/aboutme")
       },function(response){
         alert('Invalid user name or password');
           $('error').text('Invalid email or password')
@@ -46,20 +43,16 @@ appControllers.controller('signupController',function($scope,$http,$stateParams,
               "password":$scope.password,
               "aboutyou":$scope.aboutyou
              },
-//           url: "http://upload-env.tmnqr8eusq.us-west-1.elasticbeanstalk.com/api/signup",
              url: "api/signup",
                method: "POST",
         })
         .then(function(response) {
-                // success
                 localStorage.setItem('email',$scope.email);
-      // localStorage.setItem('userdata',JSON.stringify(response.data));
                 var urlredirect = 'home';
             $state.go(urlredirect);
         },
-        function(response) { // optional
-                // failed
-                alert("signup failed " + response.status + " statusText = " + response.statusText + " data = " + response.data );
+        function(response) {
+                alert("signup failed ");
         });
     };
 });
@@ -85,24 +78,20 @@ appControllers.controller('contactController',function($scope,$http,$stateParams
         formData.append('emailid', localStorage.getItem('email'));
        $http({
              data: formData,
-            // url: "http://upload-env.tmnqr8eusq.us-west-1.elasticbeanstalk.com/api/userdata",
             url: "api/userdata",
             tranformRequest: angular.identity,
             tranformResponse: angular.identity,
             headers: {
-            'Content-Type':undefined//,
-           //'Access-Control-Allow-Origin' : '*',
+            'Content-Type':undefined
            },
             method: "POST",
         })
         .then(function(response) {
-                // success
-                alert("file uploaded" +response.status);
+                alert("File uploaded successfully");
                 $scope.user.emailid='';
         },
-        function(response) { // optional
-                // failed
-                 alert("File Upload Failed " + response.status);
+        function(response) {
+                 alert("File upload failed");
         });
        $scope.firstName='',
        $scope.lastName='',
@@ -126,15 +115,9 @@ appControllers.controller('retrieveController',function($scope,$http,$stateParam
         },
         function (response)
         {
-            alert("Failed = " + response.status);
+            alert("Failed to retrieve files");
         });
     };
-    // $scope.deleteFile=function(key){
-    //   $http.get('http://upload-env.tmnqr8eusq.us-west-1.elasticbeanstalk.com/api/delete',{params:{"key": key}}).success( function(response) {
-    //     alert('File Deleted');
-    //     $scope.retrievedata();
-    //   });
-    // };
     $scope.deleteFile=function(key){
       $http.get('api/delete',{params:{"key": key}}).success( function(response) {
         alert('File Deleted');
@@ -153,10 +136,6 @@ appControllers.controller('updateController',function($scope,$http,$stateParams,
       $scope.aboutyou =JSON.parse(localStorage.getItem('userdata'))[0].aboutyou;
       $scope.oldfile =$stateParams.id;
        $scope.deleteFile=function(key){
-      // $http.get('http://upload-env.tmnqr8eusq.us-west-1.elasticbeanstalk.com/api/delete',{params:{"key": key}}).success( function(response) {
-      //   //alert('File Deleted');
-      //   //$scope.reterivedata();
-      // });
 
       $http.get('api/delete',{params:{"key": key}}).success( function(response) {
         alert('File Deleted');
@@ -166,34 +145,26 @@ appControllers.controller('updateController',function($scope,$http,$stateParams,
     };
       $scope.updatefile=function(){
             var formData = new FormData();
-            // for(key in $scope.user){
-            //   formData.append(key,$scope.user[key]);
-            // };
             formData.append('emailid',$scope.email);
             var file = $('#newfile')[0].files[0];
             formData.append('userfile',file);
            $http({
                  data: formData,
-                // url: "http://upload-env.tmnqr8eusq.us-west-1.elasticbeanstalk.com/api/userdata",
                 url: "api/userdata",
                 tranformRequest: angular.identity,
                 tranformResponse: angular.identity,
                 headers: {
-                'Content-Type':undefined//,
-               //'Access-Control-Allow-Origin' : '*',
+                'Content-Type':undefined
                },
                 method: "POST",
             })
             .then(function(response) {
-                    // success
                     $scope.deleteFile($scope.oldfile);
-                    alert("File Update Successful");
+                    alert("File update successful");
                     $state.go('retrieve');
-                   // $scope.user.emailid='';
             },
-            function(response) { // optional
-                    // failed
-                     alert("File Upload Failed " + response.status);
+            function(response) {
+                     alert("File upload failed");
             });
       }
 });
